@@ -5,7 +5,7 @@ var config = require('./webpack.config');
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     watchOptions: {
-      aggregateTimeout: 300,
+      aggregateTimeout: 100,
       poll: 1000,
       ignored: /node_modules/
     }

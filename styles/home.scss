@@ -70,7 +70,9 @@ body {
     .navbar {
       background: #d7fa97;
       border-bottom: 1px solid black;
+      display: flex;
       height: 60px;
+      justify-content: center;
       left: 0;
       padding: 0 10px;
       position: fixed;
@@ -89,3 +91,6 @@ body {
       padding: 0 10px;
       text-decoration: none;
     }
+#react-root > div > nav > img {
+	height: 60px;
+}
