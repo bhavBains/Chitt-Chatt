@@ -13,7 +13,7 @@ const rando = () => {
 }
 
 class App extends Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       currentUser: {name: "Anonymous"},
@@ -36,15 +36,21 @@ class App extends Component {
     this.setState({currentUser: { name: name}});
   }
 
-  handleInsertMessage = (message) => {
+   handleInsertMessage = (message) => {
     const newMessage = {
+      type: "postMessage",
       username: message.username,
       content: message.content,
       id: rando()
     }
     this.socket.send(JSON.stringify(newMessage));
-  }
 
+    if(this.state.currentUser.name !== message.username) {
+      const newNotification = {type: "postNotification", id: rando(), content: `${this.state.currentUser.name} has changed their name to ${message.username}`}
+      this.state.currentUser.name = message.username;
+      this.socket.send(JSON.stringify(newNotification));
+    }
+  }
 
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001");
@@ -54,13 +60,24 @@ class App extends Component {
 
     this.socket.addEventListener('message', (msg) => {
       const messageObject = JSON.parse(msg.data);
+      const serverDataArray =[];
+
+      switch(messageObject.type) {
+        case "incomingMessage":
+          serverDataArray.push(messageObject);
+          break;
+        case "incomingNotification":
+          serverDataArray.push(messageObject);
+          break;
+        default:
+        throw new Error("Unknown event type: " + messageObject.type)
+      }
+
       this.setState({
-        messages: this.state.messages.concat(messageObject)
+        messages: this.state.messages.concat(serverDataArray)
       });
     });
-
-  }  
-
+  }
 
   render() {
     return (
