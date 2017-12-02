@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "react": "15.4.2",
+    "react-count": "^0.2.4",
     "react-dom": "15.4.2"
   }
 }

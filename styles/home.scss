@@ -94,3 +94,11 @@ body {
 #react-root > div > nav > img {
 	height: 60px;
 }
+
+#react-root > div > nav > span {
+    font-weight: bolder;
+    line-height: 60px;
+    margin-right: 20px;
+	position: absolute;
+    right: 0;
+}

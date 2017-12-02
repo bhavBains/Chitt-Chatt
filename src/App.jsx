@@ -59,6 +59,7 @@ class App extends Component {
     }
 
     this.socket.addEventListener('message', (msg) => {
+      console.log(msg);
       const messageObject = JSON.parse(msg.data);
       const serverDataArray =[];
 
@@ -83,8 +84,8 @@ class App extends Component {
     return (
       <div>
       	<nav className="navbar">
-    		  <a href="/" className="navbar-brand">My Chatty App</a><img src="https://media.giphy.com/media/dUegoPhtD5hOU/giphy.gif"></img>
-    		</nav>
+          <a href="/" className="navbar-brand">My Chatty App</a><img src="https://media.giphy.com/media/dUegoPhtD5hOU/giphy.gif"></img>
+      		<span>Online Users: </span></nav>
     		<MessageList messages={this.state.messages}/>
     		<ChatBar currentUser={this.state.currentUser.name} handleInsertMessage={this.handleInsertMessage}
                  handleNameChange={this.handleNameChange} />
