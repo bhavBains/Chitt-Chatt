@@ -56,6 +56,9 @@ class App extends Component {
     this.socket = new WebSocket("ws://localhost:3001");
     this.socket.onopen = (event) => {
       console.log('Connected to server');
+      console.log("Event should be number of users:  ", event);
+      const onlineCount = JSON.parse(event);
+      this.state.counter = onlineCount.count;
     }
 
     this.socket.addEventListener('message', (msg) => {
@@ -70,6 +73,10 @@ class App extends Component {
         case "incomingNotification":
           serverDataArray.push(messageObject);
           break;
+        case "incomingUser":
+          this.setState({
+            counter: messageObject.count
+          }); 
         default:
         throw new Error("Unknown event type: " + messageObject.type)
       }
@@ -85,7 +92,7 @@ class App extends Component {
       <div>
       	<nav className="navbar">
           <a href="/" className="navbar-brand">My Chatty App</a><img src="https://media.giphy.com/media/dUegoPhtD5hOU/giphy.gif"></img>
-      		<span>Online Users: </span></nav>
+      		<span>Online Users:{this.state.counter} </span></nav>
     		<MessageList messages={this.state.messages}/>
     		<ChatBar currentUser={this.state.currentUser.name} handleInsertMessage={this.handleInsertMessage}
                  handleNameChange={this.handleNameChange} />
