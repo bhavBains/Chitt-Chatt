@@ -1,4 +1,4 @@
-Chatty App
+Chitt-Chatt
 =====================
 
 A client-side SPA (single-page app) built with ReactJS, Webpack, Babel, Node.js and Web Sockets. The client-side app communicates with a server via WebSockets for multi-user real-time updates. No persistent database is involved; the focus is on the client-side experience
@@ -7,7 +7,6 @@ A client-side SPA (single-page app) built with ReactJS, Webpack, Babel, Node.js 
 
 ### Usage
 
-Clone the repo to your local machine.
 Install the dependencies and start the server.
 
 1st server
@@ -25,12 +24,6 @@ npm install
 npm start
 open http://localhost:3000
 ```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
 
 ### Linting
 
